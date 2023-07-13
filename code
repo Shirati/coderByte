@@ -1,0 +1,263 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp1
+{
+    public class Program
+    {
+        class MainClass
+        {
+
+            public static string LongestWord(string sen)
+            {
+                int max = 1, count = 1;
+
+                string s = sen[0].ToString(), ans = s;
+                // code goes here
+
+                for (int i = 1; i < sen.Length; i++)
+                {
+                    if ((sen[i] > 'a' && sen[i] < 'z') || (sen[i] > 'A' && sen[i] < 'Z') || sen[i].ToString() == " ")
+                    {
+                        Console.WriteLine(true);
+                        if (sen[i].ToString() == " ")
+                        {
+                            if (max < count)
+                            {
+                                max = count;
+
+                                ans = s;
+                            }
+                            count = 0;
+                            s = "";
+                        }
+
+                        else
+                        {
+                            s += sen[i].ToString();
+                            count++;
+                        }
+                    }
+                }
+                if (count > max)
+                    return s;
+                return ans;
+
+            }
+            class MainClass1
+            {
+
+                public static string CodelandUsernameValidation(string str)
+                {
+                    if (str.Length < 4 || str.Length > 25)
+                        return "false";
+                    if ((str[0] < 'a' || str[0] > 'z') && (str[0] < 'A' || str[0] > 'Z'))
+                        return "false";
+                    if (str[str.Length - 1].ToString() == "_")
+                        return "false";
+                    for (int i = 0; i < str.Length; i++)
+                    {
+                        if ((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z') && str[i].ToString() != "_" && (str[i] < '0' || str[i] > '9'))
+                            return "false";
+                    }
+                    // code goes here  
+                    return "true";
+
+                }
+                public static string F1(string str)
+                {
+                    string strnew = "";
+                    for (int i = 0; i < str.Length; i++)
+                    {
+                        if ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i].ToString() == " ")
+                            strnew += str[i].ToString();
+                    }
+                    return strnew;
+                }
+                public static string F2(string str)
+                {
+                    //int[] arr = new int[26];
+                    string strnew = "";
+                    //for (int i = 0; i < str.Length; i++)
+                    //{
+                    //    arr[str[i] - 'a']++;
+                    //}
+                    //char c = 'a';
+                    //for (int i = 0; i < arr.Length; i++)
+                    //{
+                    //    if (arr[i] != 0)
+                    //    {
+                    //        // Console.WriteLine(c);
+                    //        strnew += arr[i].ToString() + c;
+
+                    //    }
+                    //    c++;
+
+                    //}
+                    int count = 0;
+                    for (int i = 0; i < str.Length; i++)
+                    {
+                        while (i+1 < str.Length && str[i] == str[i+1])
+                        {
+                            count++;
+                            i++;
+                        }
+                        count++;
+                        strnew += str[i].ToString() + count ;
+                        count = 0;
+                        
+                    }
+
+                    return strnew;
+                }
+                public static string FindIntersection(string[] strArr)
+                {
+                    string str1 = strArr[0];
+                    string str2 = strArr[1];
+                    string strnew = "";
+                    int i = 0, j = 0, num1 = 0, num2 = 0;
+                    while (i < str1.Length && j < str2.Length)
+                    {
+                        while (i < str1.Length && str1[i] != ',')
+                        {
+                            num1 = num1 * 10 + str1[i] - '0';
+                            i++;
+                        }
+
+                        while (j < str2.Length && str2[j] != ',')
+                        {
+                            num2 = num2 * 10 + str2[j] - '0';
+                            j++;
+                        }
+
+                        if (num1 == num2)
+                        {
+                            strnew += num1 + ",";
+                            i++;
+                            j++;
+                            num1 = 0; num2 = 0;
+                        }
+                        else
+                        {
+                            if (num1 < num2)
+                            {
+                                i++;
+                                num1 = 0;
+                            }
+
+
+                            else
+                            {
+                                j++;
+                                num2 = 0;
+                            }
+
+                        }
+                       
+                    }
+
+                    // code goes here  
+                 
+                       strnew=strnew.Remove(strnew.Length-1);
+                    return strnew;
+
+                }
+                public static bool f3(string st)
+                {
+                    if(st.Length%2!=0)
+                        return false;
+                    Stack<char>stack=new Stack<char>();
+                    int i = 0;
+                    while (i < st.Length / 2)
+                    {
+
+                        stack.Push(st[i++]);
+                        
+
+                    }
+                    char c;
+                    while(i<st.Length)
+                    {
+                        c=stack.Pop();
+                        if (c =='{')
+                           if (st[i++]!='}')
+                                  return false;
+                        if (c == '[')
+                            if (st[i++] != ']')
+                                return false;
+                        if (c == '(')
+                            if (st[i++] != ')')
+                                return false;
+                    }
+                    return true;
+                }
+                public static string Window(string st1,string st2)
+                {
+                    Dictionary<Char,int> dict=new Dictionary<Char,int>();
+                  
+
+                    for (int i = 0; i < st2.Length; i++)
+                    {
+                        if (dict.ContainsKey(st2[i]))
+                            dict[st2[i]]++;
+                        else
+                            dict[st2[i]] = 1;
+                    }
+                    int[] arr = new int[27];
+                    int sum = 0;
+                    for (int i = st2.Length; i < st1.Length; i++)
+                    {
+                        for (int j =0 ; j < st1.Length; j++)
+                        {
+                            if(i+j<st1.Length)
+                            {
+                                for (int p = j; p < i+j; p++)
+                                {
+                                   
+                                    if (dict.ContainsKey(st1[p]) && arr[st1[p] - 'a'] < dict[st1[p]])
+                                    {
+                                       
+                                        arr[st1[p] - 'a']++;
+                                        sum++;
+                                    }
+                                       
+                                }
+                                if(sum==st2.Length)
+                                    return st1.Substring(j, i+j-1);
+                                sum=0;
+                                for (int y = 0; y < arr.Length; y++)
+                                {
+                                    arr[y] = 0;
+                                }
+                            }
+                        }
+                    }
+                    return "";
+
+                }
+                public static    void Main(string[] args)
+         
+                {
+                    //Console.WriteLine(Window("oplkku","opu"));
+
+                    //  Console.WriteLine(b + " " + a);
+                    //if ((a[1] > 'a' && a[1] < 'z') || (a[1] > 'A' && a[1] < 'Z'))
+
+                    // Console.WriteLine(F2(Console.ReadLine()));
+                    //  Console.WriteLine(FindIntersection(new string[] { "1,3,4,7,13", "1,2,4,13,15" }));
+                    // Console.WriteLine(f3(Console.ReadLine()));
+                    //  Console.WriteLine(F1(Console.ReadLine()));
+                    //  Console.WriteLine(CodelandUsernameValidation(Console.ReadLine()));
+                    Console.WriteLine(LongestWord("ytuT88hhY op [tbmkykg,tl)"));
+                    Console.ReadLine();
+                }
+            }
+        }
+    }
+}
+
+
